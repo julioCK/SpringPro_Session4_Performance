@@ -39,4 +39,7 @@ No caso de entidades associadas, ***<ins>usando Spring Data JPA + Hibernate*** o
 > do banco de dados e carregados quando **explicitamente chamados no código**.
 
 ***
-<img alt="alt text" src="three-layer-arq.jpg" title="3-layer-arq"/ style="display: block; margin-left: auto; margin-right: auto;" />
+<p align="center">
+    <img alt="alt text" src="three-layer-arq.jpg" title="3-layer-arq"/>
+</p>    
+
