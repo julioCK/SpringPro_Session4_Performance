@@ -39,4 +39,4 @@ No caso de entidades associadas, ***<ins>usando Spring Data JPA + Hibernate*** o
 > do banco de dados e carregados quando **explicitamente chamados no código**.
 
 ***
-
+![alt text](three-layer-arq.jpg "3-layer-arq")
