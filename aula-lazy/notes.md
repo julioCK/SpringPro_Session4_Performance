@@ -21,14 +21,13 @@ No caso de entidades associadas, ***<ins>usando Spring Data JPA + Hibernate*** o
 >
 > Quando uma entidade *X(@ManyToOne)* consultada possui um relacionamento -1 com outra entidade *Y(@OneToMany)*, 
 > ou seja, cada entidade *X* está associada a UMA outra entidade *Y*, o carregamento é do
-> tipo **<ins>Eager**. 
+> tipo **<ins>Lazy**.
 >
->   Carregar X automaticamente vai disparar o carregamento das entidades associadas a X. Uma única
->   consulta ao banco de dados para trazer X e todas as entidades e dados relacionados com ele.
 > 
-> * **IMPORTANTE**: O padrão do Hibernate para carregamentos ManyToOne é o **LAZY**. Porém, a conversão
-> do resultado da consulta para JSON pelo Spring, o proxy Lazy é forçado a se inicializar e o Hibernate
-> faz o carregamento da entidade associada Y.
+> * **IMPORTANTE**: O padrão do Hibernate para carregamentos ManyToOne é o **LAZY**. Porém, na conversão
+> do resultado da consulta para JSON pelo Spring o mecanismo de serialização, força o proxy Lazy a inicializar 
+> e o Hibernate faz o carregamento da entidade associada Y. 
+> É necessário considerar outros processos realizados pelo Spring que podem ocasionar esse comportamento.
 
 >**Relacionamento para-muitos**
 >
@@ -38,3 +37,6 @@ No caso de entidades associadas, ***<ins>usando Spring Data JPA + Hibernate*** o
 > 
 > Carregar X vai carregar apenas X. Outros recursos e entidades relacionadas a X só serão recuperados
 > do banco de dados e carregados quando **explicitamente chamados no código**.
+
+***
+
