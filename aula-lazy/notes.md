@@ -39,7 +39,29 @@ No caso de entidades associadas, ***<ins>usando Spring Data JPA + Hibernate*** o
 > do banco de dados e carregados quando **explicitamente chamados no código**.
 
 ***
+### @Transactional
+No Spring a annotation @Transactional define que **um método ou classe deve ser executado dentro de uma
+transação**.
+>- **Transação** é um conjunto de operações que devem ser executadas de forma atômica, consistente, isolada e
+>durável - os princípios ACID:
+>   - **1. (A)tomicidade**: todas as operações devem ser conluídas com sucesso, ou nenhuma será (rollback);
+>   - **2. (C)onsistência**: o banco de dados deve sair de um estado válido para outro estado válido após
+>   a transação;
+>   - **3. (I)solamento**: uma transação não interfere em outra;
+>   - **4. (D)urabilidade**: após a transação bem sucedida (commit), os dados são permanentes.
+
+@Transactional assegura que, a sessão JPA (EntityManager) permaneça ativa durante a execução do método. Isso
+permite que o JPA faça o carregamento de todas as associações "Lazy" caso seja requisitado. 
+<br>Se houver uma tentativa de carregar associações desse tipo fora da transação, a sessão JPA estará fechada e
+o carregamento vai falhar (LazyInitializationException).
+
+Esse comportamento é chamado **<ins>Open Session in View** e pode ser configurado dentro do arquivo **application.properties**.
+
+Abaixo o modelo de arquitetura em 3 camadas define o escopo da transação: a camada Controller está fora
+da transação (open-in-view=false), isso significa a sessão JPA está inativa nesse escopo, portanto qualquer tentativa 
+de carregamento de recursos lazy nessa camada vai resultar em LazyInitializationException.
+
 <p align="center">
-    <img alt="alt text" src="three-layer-arq.jpg" title="3-layer-arq"/>
+    <img alt="alt text" src="three-layer-arq.png" title="3-layer-arq"/>
 </p>    
 
